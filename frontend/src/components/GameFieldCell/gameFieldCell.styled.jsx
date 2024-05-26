@@ -1,17 +1,18 @@
 import styled from "styled-components";
 
-export const FieldCell = styled.li`
-  height: 75px;
-  width: 75px;
+export const FieldCell = styled.div`
+  height: 185px;
+  width: 185px;
   border: 2px solid white;
-  display: flex;
+  display: grid;
   justify-content: center;
   align-items: center;
 
   align-self: center;
   font-size: 50px;
+  box-shadow: 0 0 0 2px;
 
-  grid-area: f;
+  grid-area: "f";
 `;
 
 // export const FieldCellWin = styled.div`
