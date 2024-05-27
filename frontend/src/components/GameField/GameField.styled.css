@@ -2,6 +2,7 @@
   display: grid;
 
   max-width: fit-content;
+  height: fit-content;
 
   grid-template-columns: repeat(3, auto);
   grid-template-rows: repeat(3, auto);
