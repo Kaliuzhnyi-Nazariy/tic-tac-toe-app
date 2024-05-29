@@ -6,7 +6,7 @@ const GameFieldCell = ({ id }) => {
     <FieldCell
       className="cell"
       id={id}
-      onClick={(e) => updateCell(e)}
+      onClick={(e) => updateCell(e, null)}
     ></FieldCell>
   );
 };

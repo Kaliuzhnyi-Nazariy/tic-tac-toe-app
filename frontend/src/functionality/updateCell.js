@@ -1,13 +1,23 @@
+import changePlayer from "./changePlayer";
 import { checkWin } from "./checkWin";
-// import { initializeGame } from "./initializeGame";
 
 let options = ["", "", "", "", "", "", "", "", ""];
 
 export const updateCell = (e) => {
-  // initializeGame();
-  e.target.textContent = "X";
-  options[e.target.id - 1] = "X";
+  const running = localStorage.getItem("runningGame") === "true";
+
+  if (!running) {
+    return;
+  }
+
+  if (!e) return; // Handle cases where 'e' is null or undefined
+  const currentPlayer = changePlayer();
+  console.log("currentPlayer: ", currentPlayer);
+  localStorage.setItem("playerSymbol", currentPlayer);
+  e.target.textContent = currentPlayer;
+  options[e.target.id - 1] = currentPlayer;
   checkWin(options);
+  changePlayer();
 };
 
 export default updateCell;

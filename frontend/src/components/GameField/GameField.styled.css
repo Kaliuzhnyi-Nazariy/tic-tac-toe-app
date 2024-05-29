@@ -1,6 +1,8 @@
 .gameField {
   display: grid;
 
+  grid-area: gf;
+
   max-width: fit-content;
   height: fit-content;
 

@@ -1,11 +1,9 @@
-let running = false;
 const runningGame = (isRunning) => {
-  if (isRunning !== true || isRunning !== false) {
-    return;
+  if (isRunning === true || isRunning === false) {
+    localStorage.setItem("runningGame", isRunning);
   }
-  running = isRunning;
-  console.log(running);
-  //   return (running = isRunning);
+  const isRunning2 = localStorage.getItem("runningGame") === "true";
+  return isRunning2;
 };
 
 export default runningGame;

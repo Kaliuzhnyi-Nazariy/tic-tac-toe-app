@@ -12,7 +12,6 @@ const GameField = () => {
           <GameFieldCell id={field} key={field} />
         ))}
       </div>
-      <span className="status-text"></span>
     </>
   );
 };
