@@ -3,6 +3,9 @@ import { checkWin } from "./checkWin";
 
 let options = ["", "", "", "", "", "", "", "", ""];
 
+export const resetOptions = () =>
+  (options = ["", "", "", "", "", "", "", "", ""]);
+
 export const updateCell = (e) => {
   const running = localStorage.getItem("runningGame") === "true";
 

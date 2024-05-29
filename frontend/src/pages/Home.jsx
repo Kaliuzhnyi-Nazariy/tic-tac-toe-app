@@ -1,7 +1,6 @@
 import ChatSidebar from "../components/ChatSidebar/ChatSidebar";
 import GameField from "../components/GameField/GameField";
 import { initializeGame } from "../functionality/initializeGame";
-
 import "../functionality/main";
 import { MainBlock } from "./Home.styled";
 
@@ -32,6 +31,7 @@ const Home = () => {
           type="button"
           style={{ gridArea: "sb" }}
           onClick={() => initializeGame()}
+          // disabled={disBtn}
         >
           start game!
         </button>

@@ -1,12 +1,21 @@
+import { resetOptions } from "./updateCell";
 import randomizeSymbol from "./utils/randomizeSymbol";
-import runningGame from "./utils/runningGame";
+import runningGame, { checkRunningGame } from "./utils/runningGame";
 
 export const initializeGame = () => {
   const statusText = document.querySelector(".status-text");
+  const cell = document.querySelectorAll(".cell");
   console.log("initialized");
   runningGame(true);
 
+  for (let i = 0; i < cell.length; i++) {
+    cell[i].textContent = "";
+  }
+
+  resetOptions();
+
   localStorage.setItem("runningGame", true);
+  checkRunningGame();
   const users = randomizeSymbol();
   // console.log(users.user1);
   // console.log(users.user2);
