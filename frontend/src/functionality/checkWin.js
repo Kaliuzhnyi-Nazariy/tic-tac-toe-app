@@ -10,8 +10,12 @@ const winConditions = [
   [0, 4, 8],
   [2, 4, 6],
 ];
-export const checkWin = (options) => {
+
+export const checkWin = (options, currentPlayer) => {
+  const statusText = document.querySelector(".status-text");
   let roundWon = false;
+
+  console.log(statusText);
 
   for (let i = 0; i < winConditions.length; i++) {
     const condition = winConditions[i];
@@ -24,17 +28,23 @@ export const checkWin = (options) => {
     }
     if (cellA == cellB && cellB == cellC) {
       roundWon = true;
+
       localStorage.setItem("runningGame", false);
       runningGame(false);
+      console.log(currentPlayer, "won");
+      statusText.textContent = `${currentPlayer} wins!`;
       break;
     }
   }
 
+  console.log("roundWon: ", roundWon);
+  console.log("options: ", options);
+
   if (roundWon) {
-    // statusText.textContent = `${currentPlayer} wins!`;
+    statusText.textContent = `${currentPlayer} wins!`;
     // running = false;
   } else if (!options.includes("")) {
-    // statusText.textContent = `Draw!`;
+    statusText.textContent = `Draw!`;
     // running = false;
   } else {
     // changePlayer();

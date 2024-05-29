@@ -11,13 +11,15 @@ export const updateCell = (e) => {
   }
 
   if (!e) return; // Handle cases where 'e' is null or undefined
+
   const currentPlayer = changePlayer();
-  console.log("currentPlayer: ", currentPlayer);
+  // console.log("currentPlayer: ", currentPlayer);
+
   localStorage.setItem("playerSymbol", currentPlayer);
   e.target.textContent = currentPlayer;
   options[e.target.id - 1] = currentPlayer;
-  checkWin(options);
   changePlayer();
+  checkWin(options, currentPlayer);
 };
 
 export default updateCell;

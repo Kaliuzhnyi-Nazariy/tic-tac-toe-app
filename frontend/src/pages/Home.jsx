@@ -1,7 +1,7 @@
 import ChatSidebar from "../components/ChatSidebar/ChatSidebar";
 import GameField from "../components/GameField/GameField";
 import { initializeGame } from "../functionality/initializeGame";
-// import { FieldCell } from "../components/GameFieldCell/gameFieldCell.styled";
+
 import "../functionality/main";
 import { MainBlock } from "./Home.styled";
 
@@ -26,7 +26,7 @@ const Home = () => {
             justifyContent: "center",
           }}
         >
-          Hello
+          Hello! For playing push a button below!
         </span>
         <button
           type="button"
