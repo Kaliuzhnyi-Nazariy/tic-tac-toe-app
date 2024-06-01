@@ -1,10 +1,14 @@
-import ChatSidebar from "../components/ChatSidebar/ChatSidebar";
-import GameField from "../components/GameField/GameField";
-import { initializeGame } from "../functionality/initializeGame";
-import "../functionality/main";
+import ChatSidebar from "../../components/ChatSidebar/ChatSidebar";
+import GameField from "../../components/GameField/GameField";
+import { initializeGame } from "../../functionality/initializeGame";
+import "../../functionality/main";
+import { checkRunning } from "../../functionality/utils/runningGame";
+// import { checkRunning } from "../functionality/utils/runningGame";
 import { MainBlock } from "./Home.styled";
 
 const Home = () => {
+  // console.log(checkRunning() === "true");
+  console.log(checkRunning());
   return (
     <MainBlock>
       <GameField />
@@ -31,7 +35,7 @@ const Home = () => {
           type="button"
           style={{ gridArea: "sb" }}
           onClick={() => initializeGame()}
-          // disabled={disBtn}
+          // disabled={checkRunning()}
         >
           start game!
         </button>

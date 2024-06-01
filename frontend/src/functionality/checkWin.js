@@ -1,4 +1,4 @@
-import runningGame from "./utils/runningGame";
+import runningGame, { checkRunning } from "./utils/runningGame";
 
 const winConditions = [
   [0, 1, 2],
@@ -15,7 +15,7 @@ export const checkWin = (options, currentPlayer) => {
   const statusText = document.querySelector(".status-text");
   let roundWon = false;
 
-  console.log(statusText);
+  // console.log(statusText);
 
   for (let i = 0; i < winConditions.length; i++) {
     const condition = winConditions[i];
@@ -31,17 +31,18 @@ export const checkWin = (options, currentPlayer) => {
 
       localStorage.setItem("runningGame", false);
       runningGame(false);
-      console.log(currentPlayer, "won");
+      // console.log(currentPlayer, "won");
       statusText.textContent = `${currentPlayer} wins!`;
       break;
     }
   }
 
-  console.log("roundWon: ", roundWon);
-  console.log("options: ", options);
+  // console.log("roundWon: ", roundWon);
+  // console.log("options: ", options);
 
   if (roundWon) {
     statusText.textContent = `${currentPlayer} wins!`;
+    checkRunning();
     // running = false;
   } else if (!options.includes("")) {
     statusText.textContent = `Draw!`;
