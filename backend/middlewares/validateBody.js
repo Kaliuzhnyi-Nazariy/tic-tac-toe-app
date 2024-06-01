@@ -1,15 +1,14 @@
-const { HttpError } = require("../helpers");
+const HttpError = require("../helpers/HttpError"); // Ensure the path is correct
 
 const validateBody = (schema) => {
-  const func = (req, res, next) => {
+  return (req, res, next) => {
     const { error } = schema.validate(req.body);
     if (error) {
-      next(HttpError(400, error.message));
+      next(HttpError(400, error.message)); // Use the HttpError function
+    } else {
+      next();
     }
-    next();
   };
-
-  return func;
 };
 
 module.exports = validateBody;
