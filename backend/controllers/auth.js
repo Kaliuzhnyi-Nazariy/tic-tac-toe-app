@@ -67,14 +67,12 @@ const login = async (req, res) => {
 };
 
 const logout = async (req, res) => {
-  const { id } = req.params;
-  const user = await User.findById({ _id: id });
-
+  const { _id } = req.user;
+  const user = await User.findById({ _id });
   if (!user) {
     return res.status(409).json({ error: "kalfla" });
   }
-
-  await User.findByIdAndUpdate({ _id: id }, { token: "" });
+  await User.findByIdAndUpdate(_id, { token: "" });
   res.status(204).json();
 };
 
