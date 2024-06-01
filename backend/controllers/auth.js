@@ -1,6 +1,9 @@
 const { httpError } = require("../helpers");
 const { User } = require("../models/userSchema");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
+const { SECRET_KEY } = process.env;
 
 const signup = async (req, res) => {
   try {
@@ -22,9 +25,10 @@ const signup = async (req, res) => {
 
     await newUser.save();
 
-    res
-      .status(201)
-      .json({ email: newUser.email, nickname: newUser.nickname, token });
+    res.status(201).json({
+      email: newUser.email,
+      nickname: newUser.nickname,
+    });
   } catch (error) {
     console.log("Error in auth/signup: ", error.message);
     res.status(500).json({ error: "Internal server error!" });
@@ -47,7 +51,15 @@ const login = async (req, res) => {
       return res.status(400).json({ error: "Invalid credentials!" });
     }
 
-    return res.status(200).json({ nickname: user.nickname, token: user.token });
+    const payload = {
+      id: user._id,
+    };
+
+    const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
+
+    await User.findByIdAndUpdate(user._id, { token });
+
+    return res.status(200).json({ nickname: user.nickname, token: token });
   } catch (error) {
     console.log("error in auth/login: ", error.message);
     res.status(500).json({ error: "Internal server error" });
