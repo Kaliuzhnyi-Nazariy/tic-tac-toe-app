@@ -1,30 +1,69 @@
+const { httpError } = require("../helpers");
 const { User } = require("../models/userSchema");
 const bcrypt = require("bcrypt");
 
 const signup = async (req, res) => {
-  const { nickname, password, email } = req.body;
-  console.log(nickname, password, email);
+  try {
+    const { nickname, password, email } = req.body;
 
-  // const user = User.findOne({ email });
+    const user = await User.findOne({ email });
 
-  // if (user) {
-  //   return res.status(409).json("User is already exist!");
-  // }
+    if (user) {
+      return res.status(409).json("User is already exist!");
+    }
 
-  const hashedPssw = await bcrypt.hash(password, 10);
+    const hashedPssw = await bcrypt.hash(password, 10);
 
-  // const newUser = new User.create({
-  //   ...req.body,
-  //   password: hashedPssw,
-  // });
-  const newUser = new User({
-    ...req.body,
-    password: hashedPssw,
-  });
+    const newUser = await User.create({
+      nickname,
+      email,
+      password: hashedPssw,
+    });
 
-  console.log(newUser);
+    await newUser.save();
 
-  res.status(201).json({ email: newUser.email, nickname: newUser.nickname });
+    res
+      .status(201)
+      .json({ email: newUser.email, nickname: newUser.nickname, token });
+  } catch (error) {
+    console.log("Error in auth/signup: ", error.message);
+    res.status(500).json({ error: "Internal server error!" });
+  }
 };
 
-module.exports = signup;
+const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found!" });
+      // return httpError(404);
+    }
+
+    const comparePssw = await bcrypt.compare(password, user.password);
+
+    if (!comparePssw) {
+      return res.status(400).json({ error: "Invalid credentials!" });
+    }
+
+    return res.status(200).json({ nickname: user.nickname, token: user.token });
+  } catch (error) {
+    console.log("error in auth/login: ", error.message);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
+
+const logout = async (req, res) => {
+  const { id } = req.params;
+  const user = await User.findById({ _id: id });
+
+  if (!user) {
+    return res.status(409).json({ error: "kalfla" });
+  }
+
+  await User.findByIdAndUpdate({ _id: id }, { token: "" });
+  res.status(204).json();
+};
+
+module.exports = { signup, login, logout };

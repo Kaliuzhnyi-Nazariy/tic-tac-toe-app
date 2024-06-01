@@ -1,7 +1,7 @@
 const { model, Schema } = require("mongoose");
 const Joi = require("joi");
 
-const { handleMongoose } = require("../helper/handleMongoose");
+const { handleMongoose } = require("../helpers/handleMongoose");
 
 const { joiPasswordExtendCore } = require("joi-password");
 const joiPassword = Joi.extend(joiPasswordExtendCore);
@@ -22,7 +22,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    token: String,
+    token: { type: String, default: "" },
   },
   { timestamps: true }
 );
