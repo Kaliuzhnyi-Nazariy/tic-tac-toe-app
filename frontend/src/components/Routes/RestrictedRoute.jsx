@@ -5,11 +5,9 @@ import { Navigate } from "react-router-dom";
 const RestrictedRoute = ({ component: Component, redirectTo = "/" }) => {
   const { isLoggedIn } = useAuth();
 
-  console.log(isLoggedIn);
+  console.log(Component);
 
-  const shouldRedirect = isLoggedIn;
-
-  return shouldRedirect ? <Navigate to={redirectTo} /> : Component;
+  return isLoggedIn ? <Navigate to={redirectTo} /> : Component;
 };
 
 RestrictedRoute.propTypes = {
