@@ -1,4 +1,11 @@
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/Auth/auth";
+
 const BarApp = () => {
+  const dispatch = useDispatch();
+  const handleClick = () => {
+    dispatch(logout());
+  };
   return (
     <nav
       style={{
@@ -10,7 +17,9 @@ const BarApp = () => {
       }}
     >
       <h1 style={{}}>MyTicTacToe</h1>
-      <button style={{ marginLeft: "auto" }}>exit</button>
+      <button style={{ marginLeft: "auto" }} onClick={handleClick}>
+        exit
+      </button>
     </nav>
   );
 };

@@ -1,5 +1,4 @@
 import SignUpForm from "../../components/SignUpForm/SignUpForm";
-
 const Signup = () => {
   return (
     <div>

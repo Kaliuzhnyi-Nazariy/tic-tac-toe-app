@@ -5,6 +5,7 @@ import NotFound from "./pages/NotFound/NotFound";
 import PrivateRoute from "./components/Routes/PrivateRoute";
 import RestrictedRoute from "./components/Routes/RestrictedRoute";
 import { lazy } from "react";
+// import RestrictRoute from "./components/Routes/RestrictRoute";
 
 const Home = lazy(() => import("./pages/Home/Home"));
 const Signup = lazy(() => import("./pages/Signup/Signup"));
@@ -14,15 +15,19 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route index element={<RestrictedRoute component={<Home />} />}></Route>
-
+        <Route
+          index
+          element={<PrivateRoute redirectTo="/login" component={<Home />} />}
+        />
         <Route
           path="/signup"
-          element={<RestrictedRoute component={<Signup />} redirectTo="/" />}
-        ></Route>
+          element={
+            <RestrictedRoute redirectTo="/login" component={<Signup />} />
+          }
+        />
         <Route
           path="/login"
-          element={<PrivateRoute component={<Login />} redirectTo="/login" />}
+          element={<RestrictedRoute component={<Login />} redirectTo="/" />}
         ></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Route>
