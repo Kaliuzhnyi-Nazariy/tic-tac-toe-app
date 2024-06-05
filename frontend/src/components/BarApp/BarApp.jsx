@@ -1,26 +1,31 @@
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/Auth/auth";
+import { useAuth } from "../hook/useAuth.js";
+import { ButtonsGroup, NavBar } from "./BarApp.style.jsx";
+import { ExitButton, LoginButton, SignUpButton } from "./Buttons.style.jsx";
 
 const BarApp = () => {
   const dispatch = useDispatch();
   const handleClick = () => {
     dispatch(logout());
   };
+
+  const { isLoggedIn } = useAuth();
+
   return (
-    <nav
-      style={{
-        display: "flex",
-        // gridTemplateRows: "3fr, 3   fr",
-        // gridTemplateAreas: ". n . e",
-        alignItems: "center",
-        width: "1280px",
-      }}
-    >
+    <NavBar>
       <h1 style={{}}>MyTicTacToe</h1>
-      <button style={{ marginLeft: "auto" }} onClick={handleClick}>
-        exit
-      </button>
-    </nav>
+      {isLoggedIn ? (
+        <ExitButton style={{ marginLeft: "auto" }} onClick={handleClick}>
+          exit
+        </ExitButton>
+      ) : (
+        <ButtonsGroup>
+          <SignUpButton to={"/signup"}>Signup</SignUpButton>
+          <LoginButton to={"/login"}>Login</LoginButton>
+        </ButtonsGroup>
+      )}
+    </NavBar>
   );
 };
 
