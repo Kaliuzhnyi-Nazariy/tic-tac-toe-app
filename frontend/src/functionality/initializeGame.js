@@ -36,6 +36,7 @@
 
 // export default initializeGame;
 
+import findOpponent from "../../../backend/utils/findOpponent";
 import { resetOptions } from "./updateCell";
 import randomizeSymbol from "./utils/randomizeSymbol";
 import runningGame, { checkRunning } from "./utils/runningGame";
@@ -49,6 +50,8 @@ export const initializeGame = () => {
   cells.forEach((cell) => (cell.textContent = ""));
   resetOptions();
   checkRunning();
+
+  findOpponent();
 
   localStorage.setItem("runningGame", "true");
   const users = randomizeSymbol();
