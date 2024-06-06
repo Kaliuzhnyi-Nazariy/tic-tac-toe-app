@@ -22,6 +22,10 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    isSearchingGame: {
+      type: Boolean,
+      default: false,
+    },
     token: { type: String, default: "" },
   },
   { timestamps: true }

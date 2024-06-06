@@ -25,9 +25,20 @@ const signup = async (req, res) => {
 
     await newUser.save();
 
+    const userForCreatingToken = await User.findOne({ email });
+
+    const payload = {
+      id: userForCreatingToken._id,
+    };
+
+    const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "23h" });
+
+    await User.findByIdAndUpdate(userForCreatingToken._id, { token });
+
     res.status(201).json({
       email: newUser.email,
       nickname: newUser.nickname,
+      token,
     });
   } catch (error) {
     console.log("Error in auth/signup: ", error.message);
