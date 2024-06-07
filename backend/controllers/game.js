@@ -35,14 +35,14 @@ const findOpponent = async (req, res) => {
     // console.log("Potential opponent: ", potentialOpponent._id);
 
     // const user =
-    await User.findByIdAndUpdate({ _id }, { isSearchingGame: false });
+    // await User.findByIdAndUpdate({ _id }, { isSearchingGame: false });
 
     // console.log(user);
 
-    await User.findByIdAndUpdate(
-      { _id: potentialOpponent._id },
-      { isSearchingGame: false }
-    );
+    // await User.findByIdAndUpdate(
+    //   { _id: potentialOpponent._id },
+    //   { isSearchingGame: false }
+    // );
 
     const symbol = randomizeSymbol();
 
@@ -54,6 +54,19 @@ const findOpponent = async (req, res) => {
     });
 
     game.save();
+
+    const user = await User.findByIdAndUpdate(
+      { _id },
+      // { isSearchingGame: false }
+      { symbol: symbol.user1 }
+    );
+    console.log(user);
+
+    const user2 = await User.findByIdAndUpdate(
+      { _id: potentialOpponent._id },
+      // { isSearchingGame: false }
+      { symbol: symbol.user2 }
+    );
 
     return res.status(200).json({
       playerId: game.playerId,

@@ -26,6 +26,10 @@ const userSchema = new Schema(
       type: Boolean,
       default: false,
     },
+    symbol: {
+      type: String,
+      default: "",
+    },
     token: { type: String, default: "" },
   },
   { timestamps: true }
