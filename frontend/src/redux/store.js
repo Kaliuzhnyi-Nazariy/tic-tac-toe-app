@@ -12,6 +12,7 @@ import {
 } from "redux-persist";
 import persistStore from "redux-persist/es/persistStore";
 import { authReducer } from "./Auth/authSlice";
+import { gameReducer } from "./Game/gameSlice";
 
 const authPersistConfig = {
   key: "auth",
@@ -20,7 +21,10 @@ const authPersistConfig = {
 };
 
 export const store = configureStore({
-  reducer: persistReducer(authPersistConfig, authReducer),
+  reducer: {
+    auth: persistReducer(authPersistConfig, authReducer),
+    game: gameReducer,
+  },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
