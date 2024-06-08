@@ -87,4 +87,10 @@ const logout = async (req, res) => {
   res.status(204).json();
 };
 
-module.exports = { signup, login, logout };
+const refreshUser = async (req, res) => {
+  const { _id } = req.user;
+  const user = await User.findOne({ _id }).select("-password");
+  res.json(user);
+};
+
+module.exports = { signup, login, logout, refreshUser };
