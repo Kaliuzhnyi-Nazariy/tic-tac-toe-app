@@ -5,8 +5,10 @@ export const changeIsSearching = createAsyncThunk(
   "game/changeIsSearching",
   async (credential, thunkApi) => {
     try {
-      const res = await axios.patch("/game/findOpponent", credential);
-      console.log(res);
+      // const res =
+      await axios.patch("/game/isSearching", {
+        isSearchingGame: credential,
+      });
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }

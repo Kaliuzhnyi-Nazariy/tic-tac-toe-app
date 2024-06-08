@@ -4,18 +4,23 @@ import { useGame } from "../../components/hook/useGame";
 import { initializeGame } from "../../functionality/initializeGame";
 import "../../functionality/main";
 import { checkRunning } from "../../functionality/utils/runningGame";
-// import { useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 // import { checkRunning } from "../functionality/utils/runningGame";
 import { MainBlock } from "./Home.styled";
+import { changeIsSearching } from "../../redux/Game/game";
+import { refreshUser } from "../../redux/Auth/auth";
 
 const Home = () => {
   const { isSearching } = useGame();
   console.log("isSearching: ", isSearching);
-  // const dispatch = useDispatch();
-  // const handleSubmit = () => {
-  //   dispatch({ findOpponent });
-  // };
+  const dispatch = useDispatch();
+  const handleSubmit = () => {
+    initializeGame();
+    dispatch(refreshUser());
+    dispatch(changeIsSearching(true));
+  };
+  console.log("isSearching: ", isSearching);
   // console.log(checkRunning() === "true");
 
   console.log(checkRunning());
@@ -44,7 +49,7 @@ const Home = () => {
         <button
           type="button"
           style={{ gridArea: "sb" }}
-          onClick={() => initializeGame()}
+          onClick={() => handleSubmit()}
           // disabled={checkRunning()}
         >
           start game!

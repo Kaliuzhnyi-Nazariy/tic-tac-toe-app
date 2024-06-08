@@ -19,7 +19,6 @@ export const authSlice = createSlice({
         state.isLoggedIn = true;
       })
       .addCase(login.fulfilled, (state, action) => {
-        console.log(action);
         state.user.nickname = action.payload.nickname;
         state.token = action.payload.token;
         state.isLoggedIn = true;
@@ -32,8 +31,12 @@ export const authSlice = createSlice({
       .addCase(refreshUser.pending, (state) => {
         state.isRefreshing = true;
       })
-      .addCase(refreshUser.fulfilled, (state, payload) => {
-        console.log(payload);
+      .addCase(refreshUser.fulfilled, (state, action) => {
+        state.user = {
+          nickname: action.payload.nickname,
+          email: action.payload.email,
+        };
+        state.token = action.payload.token;
       })
       .addCase(refreshUser.rejected, (state) => {
         state.isRefreshing = false;
