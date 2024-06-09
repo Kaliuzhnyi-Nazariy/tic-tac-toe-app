@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { MainBlock } from "./Home.styled";
 import { changeIsSearching, findOpponent } from "../../redux/Game/game";
 import { refreshUser } from "../../redux/Auth/auth";
+import justUtil from "../../functionality/utils/justUtil";
 
 const Home = () => {
   const { isSearching } = useGame();
@@ -20,7 +21,10 @@ const Home = () => {
     dispatch(refreshUser());
     dispatch(changeIsSearching(true));
     dispatch(findOpponent());
+    justUtil(gameInfo);
   };
+  const { gameInfo } = useGame();
+  console.log(gameInfo);
   console.log("isSearching: ", isSearching);
   // console.log(checkRunning() === "true");
 

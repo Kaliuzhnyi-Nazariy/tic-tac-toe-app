@@ -17,6 +17,5 @@ export const changeIsSearching = createAsyncThunk(
 
 export const findOpponent = createAsyncThunk("game/findOpponent", async () => {
   const res = await axios.get("/game/findOpponent");
-  console.log("res: ", res);
   return res.data;
 });

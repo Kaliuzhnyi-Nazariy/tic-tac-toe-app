@@ -3,6 +3,7 @@ import { changeIsSearching, findOpponent } from "./game";
 
 const initialState = {
   isSearching: false,
+  gameInfo: {},
 };
 
 export const gameSlice = createSlice({
@@ -14,8 +15,9 @@ export const gameSlice = createSlice({
         state.isSearching = action.meta.arg;
       })
       .addCase(findOpponent.fulfilled, (state, action) => {
-        console.log("state: ", state);
-        console.log("action: ", action);
+        // console.log("state: ", state);
+        // console.log("action: ", action);
+        state.gameInfo = action.payload;
       });
   },
 });

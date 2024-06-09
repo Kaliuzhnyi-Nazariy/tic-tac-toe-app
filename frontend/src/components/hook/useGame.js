@@ -1,7 +1,8 @@
 import { useSelector } from "react-redux";
-import { selectIsSearching } from "../../redux/Game/selectors";
+import { selectGameInfo, selectIsSearching } from "../../redux/Game/selectors";
 
 export const useGame = () => {
   const isSearching = useSelector(selectIsSearching);
-  return { isSearching };
+  const gameInfo = useSelector(selectGameInfo);
+  return { isSearching, gameInfo };
 };

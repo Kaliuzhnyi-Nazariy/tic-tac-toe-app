@@ -18,10 +18,15 @@ export const updateCell = (e) => {
   const currentPlayer = changePlayer();
   // console.log("currentPlayer: ", currentPlayer);
 
+  if (e.target.textContent != "") {
+    console.log("Cell is already taken by", e.target.textContent);
+    return;
+  }
+
   localStorage.setItem("playerSymbol", currentPlayer);
+
   e.target.textContent = currentPlayer;
   options[e.target.id - 1] = currentPlayer;
-  changePlayer();
   checkWin(options, currentPlayer);
 };
 
