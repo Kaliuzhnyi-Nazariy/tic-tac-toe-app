@@ -6,7 +6,6 @@ const { SECRET_KEY } = process.env;
 
 const authenticate = async (req, res, next) => {
   const { authorization = "" } = req.headers;
-  console.log("HEADERS: ", req.headers);
   const [bearer, token] = await authorization.split(" ");
 
   if (bearer !== "Bearer") next(HttpError(401));

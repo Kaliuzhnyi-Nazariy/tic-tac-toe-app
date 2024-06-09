@@ -60,7 +60,7 @@ const findOpponent = async (req, res) => {
       // { isSearchingGame: false }
       { symbol: symbol.user1 }
     );
-    console.log(user);
+    // console.log(user);
 
     const user2 = await User.findByIdAndUpdate(
       { _id: potentialOpponent._id },
