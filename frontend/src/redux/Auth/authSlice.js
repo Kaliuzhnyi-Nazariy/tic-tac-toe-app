@@ -37,6 +37,7 @@ export const authSlice = createSlice({
           email: action.payload.email,
         };
         state.token = action.payload.token;
+        state.isLoggedIn = true;
       })
       .addCase(refreshUser.rejected, (state) => {
         state.isRefreshing = false;

@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 
 // import { checkRunning } from "../functionality/utils/runningGame";
 import { MainBlock } from "./Home.styled";
-import { changeIsSearching } from "../../redux/Game/game";
+import { changeIsSearching, findOpponent } from "../../redux/Game/game";
 import { refreshUser } from "../../redux/Auth/auth";
 
 const Home = () => {
@@ -19,6 +19,7 @@ const Home = () => {
     initializeGame();
     dispatch(refreshUser());
     dispatch(changeIsSearching(true));
+    dispatch(findOpponent());
   };
   console.log("isSearching: ", isSearching);
   // console.log(checkRunning() === "true");

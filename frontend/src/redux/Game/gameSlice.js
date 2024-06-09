@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { changeIsSearching } from "./game";
+import { changeIsSearching, findOpponent } from "./game";
 
 const initialState = {
   isSearching: false,
@@ -9,10 +9,14 @@ export const gameSlice = createSlice({
   name: "game",
   initialState,
   extraReducers: (builder) => {
-    builder.addCase(changeIsSearching.fulfilled, (state, action) => {
-      console.log("state: ", state);
-      console.log("action: ", action);
-    });
+    builder
+      .addCase(changeIsSearching.fulfilled, (state, action) => {
+        state.isSearching = action.meta.arg;
+      })
+      .addCase(findOpponent.fulfilled, (state, action) => {
+        console.log("state: ", state);
+        console.log("action: ", action);
+      });
   },
 });
 
