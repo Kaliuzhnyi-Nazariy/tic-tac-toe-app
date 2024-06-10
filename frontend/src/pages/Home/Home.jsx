@@ -3,19 +3,15 @@ import GameField from "../../components/GameField/GameField";
 import { useGame } from "../../components/hook/useGame";
 import { initializeGame } from "../../functionality/initializeGame";
 import "../../functionality/main";
-import { checkRunning } from "../../functionality/utils/runningGame";
 import { useDispatch } from "react-redux";
-
-// import { checkRunning } from "../functionality/utils/runningGame";
 import { MainBlock } from "./Home.styled";
 import { changeIsSearching, findOpponent } from "../../redux/Game/game";
 import { refreshUser } from "../../redux/Auth/auth";
 import justUtil from "../../functionality/utils/justUtil";
 
 const Home = () => {
-  const { isSearching } = useGame();
-  console.log("isSearching: ", isSearching);
   const dispatch = useDispatch();
+  const { gameInfo } = useGame();
   const handleSubmit = () => {
     initializeGame();
     dispatch(refreshUser());
@@ -23,12 +19,7 @@ const Home = () => {
     dispatch(findOpponent());
     justUtil(gameInfo);
   };
-  const { gameInfo } = useGame();
-  console.log(gameInfo);
-  console.log("isSearching: ", isSearching);
-  // console.log(checkRunning() === "true");
 
-  console.log(checkRunning());
   return (
     <MainBlock>
       <GameField />
@@ -48,9 +39,8 @@ const Home = () => {
             textAlign: "center",
             justifyContent: "center",
           }}
-        >
-          Hello! For playing push a button below!
-        </span>
+        ></span>
+        {/* <UpdateText /> */}
         <button
           type="button"
           style={{ gridArea: "sb" }}

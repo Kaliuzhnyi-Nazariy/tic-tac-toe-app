@@ -5,7 +5,7 @@ import { resetOptions } from "./updateCell.js";
 export const initializeGame = () => {
   // const statusText = document.querySelector(".status-text");
   const cells = document.querySelectorAll(".cell");
-  console.log("initialized");
+  // console.log("initialized");
 
   // runningGame(true);
 
